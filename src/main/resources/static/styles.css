@@ -58,3 +58,107 @@ body{background:
 .primary-button,.filter-chip.active{background:linear-gradient(#e4a934,#a96d12);border-color:#f0c45e}.ghost-button,.filter-chip{border-radius:3px}.table-wrap table th{background:#181812;color:#efd18a}.table-wrap tbody tr{background:rgba(13,16,14,.96)}.table-wrap tbody tr:nth-child(even){background:rgba(17,19,15,.96)}
 /* scattered graffiti-style watermark instead of uniform lines */
 body::after{content:"KAHA IS DARK     KAHA IS DARK        KAHA IS DARK    KAHA IS DARK";position:fixed;inset:8% -8% auto -5%;height:86%;z-index:9999;pointer-events:none;white-space:pre-wrap;word-spacing:150px;line-height:8.2;font-family:'Segoe Print','Bradley Hand',cursive;font-weight:900;font-style:italic;font-size:28px;letter-spacing:2px;color:rgba(181,137,48,.09);transform:rotate(-13deg);background:none;opacity:1;text-shadow:260px 150px rgba(89,111,50,.08),-180px 310px rgba(180,137,48,.07),420px 430px rgba(89,111,50,.07)}
+
+
+/* V5.4 CASTLE NIGHT THEME — uses user-supplied fantasy castle artwork */
+body{
+  position:relative;
+  isolation:isolate;
+  background:#040608 !important;
+  color:#f5f0e6;
+  font-family:Georgia,'Times New Roman',serif;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  background-image:url('/castle-bg.png');
+  background-size:cover;
+  background-position:center 42%;
+  background-repeat:no-repeat;
+  filter:saturate(.85) contrast(1.08) brightness(.78);
+  transform:scale(1.015);
+}
+body::after{
+  content:"" !important;
+  position:fixed;
+  inset:0;
+  z-index:-2 !important;
+  pointer-events:none;
+  opacity:1 !important;
+  background:
+    radial-gradient(circle at 50% 10%,rgba(13,28,54,.08),rgba(2,5,9,.20) 42%,rgba(2,4,7,.76) 100%),
+    linear-gradient(180deg,rgba(2,5,10,.18),rgba(3,5,7,.58) 52%,rgba(2,4,6,.84));
+}
+.page-shell{position:relative;z-index:1;background:transparent;min-height:100vh}
+.topbar{
+  background:linear-gradient(180deg,rgba(9,11,13,.82),rgba(8,10,12,.68)) !important;
+  border-bottom:1px solid rgba(190,139,54,.58) !important;
+  box-shadow:0 12px 35px rgba(0,0,0,.46), inset 0 -1px rgba(255,208,103,.05);
+  backdrop-filter:blur(7px) saturate(.8);
+}
+.brand-mark{
+  border:1px solid #a7782a !important;
+  background:linear-gradient(145deg,rgba(74,51,19,.86),rgba(13,15,14,.94)) !important;
+  box-shadow:inset 0 0 14px rgba(230,169,57,.13),0 5px 16px rgba(0,0,0,.45) !important;
+}
+.topbar h1{color:#f0c05b !important;text-shadow:0 2px 0 #3a2507,0 4px 16px #000 !important}
+.eyebrow{color:#d0a04a !important}.topbar p{color:#c5d0db !important;text-shadow:0 2px 8px #000}
+main{background:linear-gradient(180deg,rgba(3,5,7,.08),rgba(3,4,5,.36));}
+.hero-card,.pick-card,.control-panel,.market-meta div,.table-wrap,.detail-card,.detail-panel,.item-identity{
+  background:
+    linear-gradient(145deg,rgba(20,23,22,.83),rgba(7,10,11,.88)) !important;
+  border:1px solid rgba(137,103,45,.78) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(245,205,115,.04),
+    inset 0 0 22px rgba(0,0,0,.28),
+    0 10px 28px rgba(0,0,0,.43) !important;
+  backdrop-filter:blur(5px) saturate(.78);
+}
+.hero-card,.pick-card,.control-panel,.detail-card,.detail-panel,.item-identity{position:relative}
+.hero-card::after,.pick-card::after,.control-panel::after,.detail-card::after,.detail-panel::after,.item-identity::after{
+  content:"";pointer-events:none;position:absolute;inset:4px;border:1px solid rgba(213,164,71,.08);
+}
+.hero-card-accent:before{width:4px;background:linear-gradient(#ffd26e,#b27013,#ffd26e) !important}
+.section-heading h2,.panel-heading h3,.item-identity h2{color:#f4e8cf;text-shadow:0 2px 8px #000}
+.section-note,.notice,.freshness{color:#b5c0ca !important;text-shadow:0 1px 4px #000}
+.primary-button,.filter-chip.active{
+  color:#1c1204 !important;
+  background:linear-gradient(180deg,#f0bf56,#bc7918 62%,#8e5710) !important;
+  border:1px solid #f0c462 !important;
+  box-shadow:inset 0 1px rgba(255,245,202,.35),0 4px 12px rgba(0,0,0,.4) !important;
+}
+.ghost-button,.filter-chip{
+  background:linear-gradient(180deg,rgba(28,34,38,.92),rgba(10,14,16,.92)) !important;
+  border:1px solid #475563 !important;color:#e4e8e9 !important;
+}
+.field input,.field select{
+  background:rgba(5,10,14,.88) !important;border-color:#46535d !important;color:#f8f4e9 !important;
+}
+.field input:focus,.field select:focus{border-color:#bd8730 !important;box-shadow:0 0 0 2px rgba(230,169,57,.13) !important}
+.table-wrap{background:rgba(5,8,10,.78) !important}
+th{background:linear-gradient(180deg,rgba(32,38,39,.97),rgba(17,21,22,.97)) !important;color:#f0d8a1 !important;border-bottom-color:#65502a !important}
+tbody tr{background:rgba(8,12,14,.83) !important}tbody tr:nth-child(even){background:rgba(14,18,19,.83) !important}
+tbody tr:hover{background:rgba(39,46,41,.90) !important}tbody tr:hover td:first-child{background:rgba(39,46,41,.90) !important}
+th:first-child{background:linear-gradient(180deg,rgba(32,38,39,.98),rgba(17,21,22,.98)) !important}
+footer{background:rgba(4,6,8,.72);border-top-color:#514021 !important;color:#8d9ba6 !important}
+.badge{background:linear-gradient(180deg,#303941,#1d2429) !important;border-color:#48535c !important}
+.good{color:#65df8e !important}.score{color:#ffc95f !important}.recommended{color:#ffd573 !important;background:#332918 !important;border-color:#795d25 !important}
+
+/* scattered hand-painted graffiti; intentionally irregular */
+.kaha-graffiti{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;font-family:'Segoe Print','Bradley Hand','Comic Sans MS',cursive;font-weight:900;font-style:italic;text-transform:uppercase}
+.kaha-graffiti span{position:absolute;display:block;white-space:nowrap;mix-blend-mode:screen;text-shadow:0 2px 5px rgba(0,0,0,.55)}
+.kaha-graffiti .g1{left:2%;top:21%;font-size:25px;transform:rotate(-17deg);color:rgba(199,146,45,.13)}
+.kaha-graffiti .g2{right:5%;top:12%;font-size:36px;transform:rotate(13deg);color:rgba(101,137,75,.12)}
+.kaha-graffiti .g3{left:36%;top:47%;font-size:22px;transform:rotate(-8deg);color:rgba(222,170,64,.10)}
+.kaha-graffiti .g4{right:-2%;top:61%;font-size:41px;transform:rotate(-20deg);color:rgba(166,125,43,.11)}
+.kaha-graffiti .g5{left:-2%;top:74%;font-size:31px;transform:rotate(11deg);color:rgba(92,130,71,.11)}
+.kaha-graffiti .g6{left:55%;top:82%;font-size:28px;transform:rotate(7deg);color:rgba(206,151,45,.09)}
+.kaha-graffiti .g7{right:19%;top:34%;font-size:18px;transform:rotate(-29deg);color:rgba(94,135,71,.10)}
+.kaha-graffiti .g8{left:17%;top:58%;font-size:19px;transform:rotate(23deg);color:rgba(218,164,63,.09)}
+.kaha-graffiti .g9{right:34%;top:93%;font-size:34px;transform:rotate(-12deg);color:rgba(96,132,72,.10)}
+@media(max-width:800px){
+ body::before{background-position:57% 38%}
+ .kaha-graffiti .g2,.kaha-graffiti .g4,.kaha-graffiti .g6{display:none}
+}
