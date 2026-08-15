@@ -46,3 +46,15 @@ body::after{
     background-size:390px 165px;
   }
 }
+
+/* V5.3 medieval KAHA IS DARK theme */
+body{background:
+ radial-gradient(circle at 50% 0%,rgba(205,145,38,.13),transparent 38%),
+ linear-gradient(rgba(5,7,8,.88),rgba(5,7,8,.95)),
+ repeating-linear-gradient(90deg,#0b0d0c 0 90px,#10130f 90px 180px);font-family:Georgia,'Times New Roman',serif}
+.topbar{background:linear-gradient(180deg,rgba(15,13,9,.97),rgba(7,9,9,.94));border-bottom-color:#59451f;box-shadow:0 8px 30px rgba(0,0,0,.55)}
+.topbar h1,.section-heading h2{font-family:Georgia,'Times New Roman',serif;text-shadow:0 2px 8px #000}.brand-mark{border-radius:4px;border-color:#8a6828;background:radial-gradient(circle,#3b2b13,#100d08)}
+.hero-card,.pick-card,.control-panel,.market-meta div,.table-wrap,.detail-card,.detail-panel,.item-identity{border-radius:4px;border-color:#514325;background:linear-gradient(145deg,rgba(25,24,18,.97),rgba(9,12,11,.98));box-shadow:inset 0 0 0 1px rgba(231,174,62,.05),0 16px 38px rgba(0,0,0,.35)}
+.primary-button,.filter-chip.active{background:linear-gradient(#e4a934,#a96d12);border-color:#f0c45e}.ghost-button,.filter-chip{border-radius:3px}.table-wrap table th{background:#181812;color:#efd18a}.table-wrap tbody tr{background:rgba(13,16,14,.96)}.table-wrap tbody tr:nth-child(even){background:rgba(17,19,15,.96)}
+/* scattered graffiti-style watermark instead of uniform lines */
+body::after{content:"KAHA IS DARK     KAHA IS DARK        KAHA IS DARK    KAHA IS DARK";position:fixed;inset:8% -8% auto -5%;height:86%;z-index:9999;pointer-events:none;white-space:pre-wrap;word-spacing:150px;line-height:8.2;font-family:'Segoe Print','Bradley Hand',cursive;font-weight:900;font-style:italic;font-size:28px;letter-spacing:2px;color:rgba(181,137,48,.09);transform:rotate(-13deg);background:none;opacity:1;text-shadow:260px 150px rgba(89,111,50,.08),-180px 310px rgba(180,137,48,.07),420px 430px rgba(89,111,50,.07)}

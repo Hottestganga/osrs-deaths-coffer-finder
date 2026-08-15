@@ -78,6 +78,7 @@ public class OsrsPriceService {
             long high = live.path("high").asLong(0);
             long low = live.path("low").asLong(0);
             long highTime = live.path("highTime").asLong(0);
+            long lowTime = live.path("lowTime").asLong(0);
 
             if (high <= 0 && low <= 0) {
                 continue;
@@ -96,7 +97,13 @@ public class OsrsPriceService {
             }
             cofferEligibleItems++;
 
-            long liveBuy = high > 0 ? high : low;
+            long staleCutoff = Instant.now().minus(Duration.ofMinutes(15)).getEpochSecond();
+            boolean freshHigh = high > 0 && highTime >= staleCutoff;
+            boolean freshLow = low > 0 && lowTime >= staleCutoff;
+            // A stale high can make an item look buyable when nobody is actually selling there now.
+            // Prefer a fresh high; only fall back to low when that low observation itself is fresh.
+            if (!freshHigh && !freshLow) continue;
+            long liveBuy = freshHigh ? high : low;
             long coffer = Math.round(guide * 1.05d);
             long saving = coffer - liveBuy;
             if (saving <= 0) {
@@ -140,7 +147,7 @@ public class OsrsPriceService {
 
         System.out.printf(
                 Locale.ROOT,
-                "V5 scan: %,d mapped, %,d live, %,d official, %,d coffer eligible, %,d profitable.%n",
+                "V5.3 scan: %,d mapped, %,d live, %,d official, %,d coffer eligible, %,d profitable.%n",
                 mappedItems, livePricedItems, officialPricedItems, cofferEligibleItems, result.size()
         );
 
