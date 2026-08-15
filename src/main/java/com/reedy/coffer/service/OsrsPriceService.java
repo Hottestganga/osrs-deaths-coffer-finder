@@ -22,7 +22,7 @@ public class OsrsPriceService {
     private static final String WIKI_BASE = "https://prices.runescape.wiki/api/v1/osrs";
     private static final String RUNELITE_BOOTSTRAP = "https://static.runelite.net/bootstrap.json";
     private static final String RUNELITE_API_PREFIX = "https://api.runelite.net/runelite-";
-    private static final String USER_AGENT = "osrs-deaths-coffer-finder/4.0 (community Death's Coffer comparison tool)";
+    private static final String USER_AGENT = "osrs-deaths-coffer-finder/5.0 (community Death's Coffer comparison tool)";
     private static final Duration RESULT_TTL = Duration.ofSeconds(60);
     private static final Pattern CLIENT_VERSION = Pattern.compile("^client-([0-9.]+)\\.jar$");
 
@@ -33,6 +33,13 @@ public class OsrsPriceService {
 
     private volatile CofferScanResult resultCache;
     private volatile Instant resultCacheTime = Instant.EPOCH;
+
+    public CofferOpportunity getItem(int id, boolean forceRefresh) throws Exception {
+        return getScan(forceRefresh).opportunities().stream()
+                .filter(item -> item.id() == id)
+                .findFirst()
+                .orElse(null);
+    }
 
     public synchronized CofferScanResult getScan(boolean forceRefresh) throws Exception {
         if (!forceRefresh && resultCache != null
@@ -133,7 +140,7 @@ public class OsrsPriceService {
 
         System.out.printf(
                 Locale.ROOT,
-                "V4 scan: %,d mapped, %,d live, %,d official, %,d coffer eligible, %,d profitable.%n",
+                "V5 scan: %,d mapped, %,d live, %,d official, %,d coffer eligible, %,d profitable.%n",
                 mappedItems, livePricedItems, officialPricedItems, cofferEligibleItems, result.size()
         );
 

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="OSRS Death's Coffer item details and live Grand Exchange comparison.">
+  <title>Item Details • Death's Coffer Finder</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="item.css">
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar item-topbar">
+    <div class="brand-wrap">
+      <div class="brand-mark">☠</div>
+      <div>
+        <div class="eyebrow">DEATH'S COFFER ITEM ANALYSIS</div>
+        <h1 id="pageTitle">Loading item… <span class="version">V5</span></h1>
+        <p>Live GE comparison against Death's Coffer credit value.</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <a class="ghost-button link-button" href="/">← Back to scanner</a>
+      <button id="refreshItem" class="primary-button">Refresh item</button>
+    </div>
+  </header>
+
+  <main class="item-main">
+    <div id="itemError" class="error-box" hidden></div>
+
+    <section class="item-identity">
+      <div class="item-icon-shell"><img id="itemIcon" alt=""></div>
+      <div>
+        <div class="eyebrow" id="membership">—</div>
+        <h2 id="itemName">Loading…</h2>
+        <p id="itemSummary">Fetching the latest market snapshot.</p>
+      </div>
+      <div class="item-badges">
+        <span id="confidenceBadge" class="badge">—</span>
+        <span id="liquidityBadge" class="badge">—</span>
+      </div>
+    </section>
+
+    <section class="detail-hero-grid">
+      <article class="detail-card accent"><span>Live buy</span><strong id="liveBuy">—</strong><small>recent high-side trade</small></article>
+      <article class="detail-card"><span>Death's Coffer value</span><strong id="cofferValue">—</strong><small>105% of official GE</small></article>
+      <article class="detail-card success"><span>Saving per item</span><strong id="savingPerItem">—</strong><small id="savingPercent">—</small></article>
+      <article class="detail-card"><span>Value multiplier</span><strong id="valueMultiplier">—</strong><small>coffer credit ÷ buy price</small></article>
+    </section>
+
+    <section class="detail-grid">
+      <article class="detail-panel">
+        <div class="panel-heading"><span class="eyebrow">PRICE BREAKDOWN</span><h3>Where the value comes from</h3></div>
+        <div class="stat-list">
+          <div><span>Live buy estimate</span><strong id="liveBuy2">—</strong></div>
+          <div><span>Live sell estimate</span><strong id="liveSell">—</strong></div>
+          <div><span>Official GE guide</span><strong id="officialGe">—</strong></div>
+          <div class="highlight-row"><span>Coffer credit (105%)</span><strong id="cofferValue2">—</strong></div>
+          <div><span>GE spread</span><strong id="spread">—</strong></div>
+        </div>
+        <div class="formula-box">Coffer value = Official GE × 1.05</div>
+      </article>
+
+      <article class="detail-panel">
+        <div class="panel-heading"><span class="eyebrow">MARKET ACTIVITY</span><h3>Can you realistically buy it?</h3></div>
+        <div class="stat-list">
+          <div><span>1h buy-side volume</span><strong id="buyVol">—</strong></div>
+          <div><span>1h sell-side volume</span><strong id="sellVol">—</strong></div>
+          <div><span>1h total volume</span><strong id="totalVol">—</strong></div>
+          <div><span>GE buy limit</span><strong id="buyLimit">—</strong></div>
+          <div><span>Practical score</span><strong id="practicalScore">—</strong></div>
+        </div>
+      </article>
+
+      <article class="detail-panel wide">
+        <div class="panel-heading"><span class="eyebrow">FULL-LIMIT SCENARIO</span><h3>Potential coffer advantage</h3></div>
+        <div class="limit-grid">
+          <div><span>Cost to buy one GE limit</span><strong id="limitCost">—</strong></div>
+          <div><span>Coffer credit for one GE limit</span><strong id="limitCoffer">—</strong></div>
+          <div class="limit-profit"><span>Potential extra coffer value</span><strong id="limitSaving">—</strong></div>
+        </div>
+        <p class="section-note left-note">This is theoretical. It assumes every item in the limit fills at the displayed live-buy estimate. Thin markets can move before your order fills.</p>
+      </article>
+    </section>
+
+    <section class="detail-panel timestamps">
+      <div class="panel-heading"><span class="eyebrow">DATA FRESHNESS</span><h3>Price timestamps</h3></div>
+      <div class="timestamp-grid">
+        <div><span>Latest buy-side trade</span><strong id="liveTimestamp">—</strong></div>
+        <div><span>Official GE snapshot</span><strong id="officialTimestamp">—</strong></div>
+        <div><span>Item ID</span><strong id="itemId">—</strong></div>
+      </div>
+    </section>
+
+    <section class="disclaimer">
+      <strong>Before buying:</strong> live prices are recent trade observations, not guaranteed offers. Check the Grand Exchange yourself before committing large amounts of GP.
+    </section>
+  </main>
+
+  <footer><span>Death's Coffer Finder V5</span><span>Community tool • Not affiliated with Jagex</span></footer>
+</div>
+<script src="item.js"></script>
+</body>
+</html>

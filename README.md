@@ -1,8 +1,8 @@
-# Death's Coffer Finder V4
+# Death's Coffer Finder V5
 
 A Spring Boot website for finding Old School RuneScape Grand Exchange items that may provide good value when sacrificed to Death's Coffer.
 
-## What V4 adds
+## What V5 adds
 
 - Public-site-ready OSRS-inspired responsive design
 - Best realistic buys cards
@@ -49,3 +49,7 @@ The website only treats items with an official GE value of at least 10,000 gp as
 ## Important
 
 Real-time market prices are recent trade observations, not guaranteed buy offers. Low-volume items can move sharply, and special Death's Coffer restrictions can change. Check the in-game GE and current game rules before spending large amounts of GP.
+
+
+## V5 item pages
+Click any market row or quick-pick card to open a dedicated item details page with coffer maths, live buy/sell prices, volume, confidence, GE limit potential and data freshness.

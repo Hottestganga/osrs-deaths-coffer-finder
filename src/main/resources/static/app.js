@@ -83,7 +83,7 @@ function render() {
   $('rows').innerHTML = rows.map(x => {
     const recommended = isRecommended(x);
     return `
-      <tr>
+      <tr class="clickable-row" data-item-id="${x.id}" tabindex="0" aria-label="Open ${escapeHtml(x.name)} details">
         <td><div class="item"><img src="${itemIconUrl(x)}" onerror="this.style.display='none'" alt=""><span class="item-meta"><span class="item-name">${escapeHtml(x.name)}</span><span class="item-tag">${recommended ? 'Recommended opportunity' : (x.members ? 'Members' : 'Free-to-play')}</span></span></div></td>
         <td class="score">${x.practicalScore.toFixed(1)}</td>
         <td><span class="badge confidence-${x.confidence.toLowerCase()}">${x.confidence}</span>${recommended ? ' <span class="badge recommended">Pick</span>' : ''}</td>
@@ -102,6 +102,7 @@ function render() {
       </tr>`;
   }).join('');
 
+  bindItemLinks();
   renderRecommendations(filtered);
   updateSortIndicators();
   saveFilters();
@@ -119,7 +120,7 @@ function renderRecommendations(filtered) {
   }
 
   $('recommendationCards').innerHTML = candidates.map((x,i) => `
-    <article class="pick-card">
+    <article class="pick-card clickable-card" data-item-id="${x.id}" tabindex="0" aria-label="Open ${escapeHtml(x.name)} details">
       <span class="pick-rank">#${i+1}</span>
       <div class="pick-title">
         <img src="${itemIconUrl(x)}" onerror="this.style.display='none'" alt="">
