@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Find Old School RuneScape Grand Exchange items trading below their Death's Coffer credit value.">
+  <title>Death's Coffer Finder</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="page-shell">
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="brand-mark">☠</div>
+      <div>
+        <div class="eyebrow">OLD SCHOOL RUNESCAPE MARKET TOOL</div>
+        <h1>Death's Coffer Finder <span class="version">V4</span></h1>
+        <p>Find GE items you can buy below their Death's Coffer credit value.</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="howItWorks" class="ghost-button">How it works</button>
+      <button id="refresh" class="primary-button">Refresh market</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-grid">
+      <article class="hero-card hero-card-accent">
+        <span>Profitable now</span>
+        <strong id="profitable">—</strong>
+        <small>items below coffer value</small>
+      </article>
+      <article class="hero-card">
+        <span>Coffer eligible</span>
+        <strong id="eligible">—</strong>
+        <small>official GE value ≥ 10,000 gp</small>
+      </article>
+      <article class="hero-card">
+        <span>Live-priced items</span>
+        <strong id="liveCount">—</strong>
+        <small>with current Wiki market data</small>
+      </article>
+      <article class="hero-card">
+        <span>Last scan</span>
+        <strong id="lastScan">—</strong>
+        <small id="refreshCountdown">Auto refresh every 60s</small>
+      </article>
+    </section>
+
+    <section class="recommendations" aria-labelledby="recommendationTitle">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">QUICK PICKS</span>
+          <h2 id="recommendationTitle">Best realistic buys</h2>
+        </div>
+        <span class="section-note">Balances saving, volume and buy limit. Always check the GE before committing.</span>
+      </div>
+      <div id="recommendationCards" class="recommendation-grid">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
+    </section>
+
+    <section class="control-panel">
+      <div class="quick-filters" aria-label="Quick filters">
+        <button class="filter-chip active" data-preset="all">All profitable</button>
+        <button class="filter-chip" data-preset="recommended">Recommended</button>
+        <button class="filter-chip" data-preset="liquid">High liquidity</button>
+        <button class="filter-chip" data-preset="bigsave">Big GP saving</button>
+      </div>
+
+      <div class="controls">
+        <div class="field field-search">
+          <label for="search">Search item</label>
+          <input id="search" type="search" placeholder="e.g. Dragon hunter crossbow">
+        </div>
+        <div class="field">
+          <label for="minSaving">Min saving %</label>
+          <input id="minSaving" type="number" min="0" step="0.1" value="0">
+        </div>
+        <div class="field">
+          <label for="minVolume">Min 1h volume</label>
+          <input id="minVolume" type="number" min="0" step="1" value="0">
+        </div>
+        <div class="field">
+          <label for="minPrice">Min live price</label>
+          <input id="minPrice" type="number" min="0" step="1000" value="0">
+        </div>
+        <div class="field">
+          <label for="confidence">Confidence</label>
+          <select id="confidence">
+            <option value="All">All</option>
+            <option value="Fair">Fair+</option>
+            <option value="Good">Good+</option>
+            <option value="High">High+</option>
+            <option value="Excellent">Excellent only</option>
+          </select>
+        </div>
+        <label class="check-field"><input id="membersOnly" type="checkbox"> Members only</label>
+        <label class="check-field"><input id="autoRefresh" type="checkbox" checked> Auto refresh</label>
+        <button id="resetFilters" class="ghost-button small">Reset filters</button>
+      </div>
+    </section>
+
+    <section class="market-meta">
+      <div><span>Mapped items</span><strong id="mapped">—</strong></div>
+      <div><span>Shown</span><strong id="count">—</strong></div>
+      <div><span>Best practical score</span><strong id="bestScore">—</strong></div>
+      <div><span>Best raw saving</span><strong id="bestSaving">—</strong></div>
+      <div><span>Official GE source</span><strong id="source">—</strong></div>
+      <div><span>RuneLite</span><strong id="rlVersion">—</strong></div>
+    </section>
+
+    <div class="status-row">
+      <p class="notice" id="status">Loading market data…</p>
+      <p class="freshness" id="freshness">—</p>
+    </div>
+
+    <div id="errorBox" class="error-box" hidden></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+        <tr>
+          <th data-key="name" title="Item name">Item</th>
+          <th data-key="practicalScore" title="A ranking that combines saving %, market volume and GE buy limit.">Practical score <span class="help">?</span></th>
+          <th data-key="confidence" title="Confidence is based on recent volume, buy limit and recency of the latest observed trade.">Confidence <span class="help">?</span></th>
+          <th data-key="liveBuyPrice" title="The recent RuneLite/Wiki high price, used here as an instant-buy estimate.">Live buy <span class="help">?</span></th>
+          <th data-key="liveSellPrice" title="The recent RuneLite/Wiki low price, useful for judging the spread.">Live sell</th>
+          <th data-key="officialGuidePrice" title="Official GE guide value from RuneLite's bulk Jagex price snapshot.">Official GE <span class="help">?</span></th>
+          <th data-key="cofferValue" title="Death's Coffer credit: 105% of the official GE guide value.">Coffer value <span class="help">?</span></th>
+          <th data-key="savingPerItem" title="Coffer value minus the estimated live buy price.">Save/item</th>
+          <th data-key="savingPercent" title="Saving per item divided by live buy price.">Saving %</th>
+          <th data-key="valueMultiplier" title="Coffer credit divided by live buy price.">Value x</th>
+          <th data-key="oneHourBuyVolume" title="One-hour volume observed around the high-price side.">1h buy vol</th>
+          <th data-key="oneHourTotalVolume" title="Combined one-hour high-side and low-side volume.">1h total vol</th>
+          <th data-key="buyLimit" title="Grand Exchange buy limit from the OSRS Wiki mapping data.">GE limit</th>
+          <th data-key="potentialSavingPerLimit" title="Theoretical saving if you filled one full GE buy limit at the shown price.">Potential/limit</th>
+          <th data-key="liquidity" title="Simple liquidity band based on one-hour market volume.">Liquidity</th>
+        </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div id="emptyState" class="empty-state" hidden>
+        <strong>No items match these filters.</strong>
+        <span>Try lowering the minimum saving or volume.</span>
+      </div>
+    </div>
+
+    <section class="disclaimer">
+      <strong>Market note:</strong> Prices are observations from recent trades, not guaranteed offers. Thinly traded items can move quickly. Check the live GE before buying a large quantity.
+    </section>
+  </main>
+
+  <footer>
+    <span>Death's Coffer Finder V4</span>
+    <span>Community tool • Not affiliated with Jagex</span>
+  </footer>
+</div>
+
+<dialog id="infoDialog">
+  <div class="dialog-head">
+    <div><span class="eyebrow">HOW IT WORKS</span><h2>Finding coffer value</h2></div>
+    <button id="closeDialog" class="icon-button" aria-label="Close">×</button>
+  </div>
+  <div class="dialog-body">
+    <p>Death's Coffer credits an eligible item at <strong>105% of its official GE guide value</strong>. This site compares that credit against the recent real-time GE price observed by the OSRS Wiki/RuneLite price system.</p>
+    <div class="formula">Coffer value = Official GE × 1.05</div>
+    <div class="formula">Saving = Coffer value − Live buy</div>
+    <p><strong>Practical score</strong> is only a ranking aid. It reduces the influence of huge-looking discounts when the item has very little trading volume or an awkward buy limit.</p>
+    <p>Low-confidence opportunities remain visible because they can still be useful, but they deserve extra checking before you spend GP.</p>
+  </div>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: deaths-coffer-finder
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
