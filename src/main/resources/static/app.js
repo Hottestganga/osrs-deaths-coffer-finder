@@ -17,7 +17,7 @@ const compactGp = n => {
   return num(value);
 };
 const confidenceRank = {Low:1, Fair:2, Good:3, High:4, Excellent:5};
-const savedFiltersKey = 'cofferFinderV4Filters';
+const savedFiltersKey = 'cofferFinderV5Filters';
 
 async function load(force = false) {
   $('status').textContent = force ? 'Refreshing the full market…' : 'Scanning the full live GE market…';
@@ -102,10 +102,33 @@ function render() {
       </tr>`;
   }).join('');
 
-  bindItemLinks();
   renderRecommendations(filtered);
+  bindItemLinks();
   updateSortIndicators();
   saveFilters();
+}
+
+
+function bindItemLinks() {
+  document.querySelectorAll('[data-item-id]').forEach(el => {
+    const id = el.dataset.itemId;
+    if (!id || el.dataset.linkBound === 'true') return;
+
+    el.dataset.linkBound = 'true';
+    el.style.cursor = 'pointer';
+
+    const openItem = () => {
+      window.location.href = `/item.html?id=${encodeURIComponent(id)}`;
+    };
+
+    el.addEventListener('click', openItem);
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openItem();
+      }
+    });
+  });
 }
 
 function renderRecommendations(filtered) {
@@ -143,7 +166,7 @@ function applyPreset(name) {
   activePreset = name;
   document.querySelectorAll('.filter-chip').forEach(btn => btn.classList.toggle('active', btn.dataset.preset === name));
   if (name === 'all') {
-    $('minSaving').value = 0; $('minVolume').value = 0; $('confidence').value = 'All';
+    $('minSaving').value = 0; $('minVolume').value = 10; $('confidence').value = 'All';
   } else if (name === 'recommended') {
     $('minSaving').value = 2; $('minVolume').value = 50; $('confidence').value = 'Fair';
   } else if (name === 'liquid') {
