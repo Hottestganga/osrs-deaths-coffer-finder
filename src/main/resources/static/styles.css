@@ -211,3 +211,28 @@ dialog{background:rgba(9,14,16,.88) !important}
   body::before{background-position:54% 35% !important;filter:saturate(1.04) contrast(1.02) brightness(.92) !important}
   .hero-card,.pick-card,.control-panel,.table-wrap{background:rgba(6,10,12,.70) !important}
 }
+
+/* V5.6: keep castle bright, make information surfaces solid black for readability */
+.hero-card,
+.pick-card,
+.control-panel,
+.market-meta div,
+.table-wrap,
+.detail-card,
+.detail-panel,
+.item-identity {
+  background: rgba(3,5,6,.94) !important;
+  backdrop-filter: none !important;
+}
+.hero-card,.pick-card{background:linear-gradient(145deg,rgba(7,9,9,.96),rgba(0,0,0,.94)) !important}
+.control-panel{background:rgba(3,5,6,.95) !important}
+.market-meta div{background:rgba(2,4,5,.95) !important}
+.table-wrap{background:rgba(2,4,5,.94) !important}
+th{background:rgba(14,17,17,.98) !important}
+th:first-child{background:rgba(14,17,17,.99) !important}
+tbody tr{background:rgba(3,5,6,.95) !important}
+tbody tr:nth-child(even){background:rgba(7,9,9,.95) !important}
+tbody tr:hover,tbody tr:hover td:first-child{background:rgba(30,35,30,.97) !important}
+.field input,.field select{background:rgba(0,3,5,.96) !important}
+.ghost-button,.filter-chip{background:rgba(7,10,11,.96) !important}
+dialog{background:rgba(4,7,8,.98) !important}

@@ -55,5 +55,5 @@ Real-time market prices are recent trade observations, not guaranteed buy offers
 Click any market row or quick-pick card to open a dedicated item details page with coffer maths, live buy/sell prices, volume, confidence, GE limit potential and data freshness.
 
 
-## V5.5 visual theme
+## V5.6 visual theme
 Uses the supplied castle image as the fixed site background with translucent medieval bronze/iron panels and irregular KAHA IS DARK graffiti.
