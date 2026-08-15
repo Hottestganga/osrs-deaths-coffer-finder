@@ -26,3 +26,23 @@ button,input,select{font:inherit}.page-shell{min-height:100vh}.topbar{padding:28
 @media(max-width:650px){.topbar{align-items:flex-start;flex-direction:column;padding:20px}.brand-mark{display:none}.header-actions{width:100%}.header-actions button{flex:1}.hero-grid,.market-meta,.controls{grid-template-columns:1fr}.field-search{grid-column:auto}.pick-metrics{grid-template-columns:1fr 1fr}.status-row{align-items:flex-start;flex-direction:column}.freshness{white-space:normal}.topbar h1{font-size:1.7rem}main{padding:18px 12px 30px}.table-wrap{border-radius:10px}.check-field{padding:4px 0}footer{flex-direction:column}}
 
 .clickable-row{cursor:pointer}.clickable-row:focus{outline:2px solid var(--gold);outline-offset:-2px}.clickable-card{cursor:pointer;transition:transform .16s ease,border-color .16s ease}.clickable-card:hover,.clickable-card:focus{transform:translateY(-2px);border-color:#6f5729;outline:none}.item-name:after{content:"  ›";color:#79643c;font-weight:900}.clickable-row:hover .item-name:after,.clickable-card:hover strong:after{color:var(--gold)}
+
+/* V5.2 repeating OSRS-colour watermark */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  pointer-events:none;
+  opacity:.11;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='220' viewBox='0 0 520 220'%3E%3Cg transform='rotate(-22 260 110)' font-family='Georgia,serif' font-size='24' font-weight='700' letter-spacing='1'%3E%3Ctext x='-30' y='82' fill='%23e8aa35'%3Eganga what you doing%3C/text%3E%3Ctext x='180' y='170' fill='%237f9b48'%3Eganga what you doing%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:repeat;
+  background-size:520px 220px;
+}
+
+@media(max-width:650px){
+  body::after{
+    opacity:.09;
+    background-size:390px 165px;
+  }
+}
